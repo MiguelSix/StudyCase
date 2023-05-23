@@ -1,0 +1,42 @@
+Red Privada: 172.16.0.0/13
+2 subredes (10,000 y 8,000)
+1 subred (1000)
+
+---------------------------------------------------
+
+Para cada segmento:
+    -1 LAN Izquierda (Subred = 4000, DHCP = 3000)
+    -1 LAN Derecha (Subred = 3000, DHCP = 2000)
+    -1 LAN Derecha Admin = 100
+    -2 WAN (4 hosts)
+
+---------------------------------------------------
+
+	1 de 10,000 Hosts (Lado Izquierdo)
+	1 de 8,0000 Hosts (Lado Derecho)
+	1 de 1,000 Hosts (Derecho Admin)
+
+Izq:			Der:
+1 de 4,000		1 de 3,000
+1 de 3,000		1 de 2,000
+2 de 4			1 de 100
+			2 de 4
+
+---------------------------------------------------
+
+VLANs subred izquierda:
+	Sales (1200) 		VLAN 30
+	Accounting (450)	VLAN 40
+	HR (200)		VLAN 50
+	Production (400)	VLAN 60
+	Management (20)		VLAN 70
+	Native (45)		VLAN 100
+
+
+VLANs subred derecha:
+	Sales (1000) 		VLAN 30
+	Accounting (600)	VLAN 40
+	HR (300)		VLAN 50
+	Production (250)	VLAN 60
+	Management (20)		VLAN 70
+	Native (60)		VLAN 100
