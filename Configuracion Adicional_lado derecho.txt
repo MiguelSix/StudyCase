@@ -1,0 +1,88 @@
+CREACION DE SUBINTERFACES
+
+int f0/0.30
+encapsulation dot1Q 30
+ip add 172.23.248.3 255.255.248.0
+
+int f0/0.40
+encapsulation dot1Q 40
+ip add 172.23.246.3 255.255.254.0
+
+int f0/0.50
+encapsulation dot1Q 50
+ip add 172.23.243.3 255.255.255.0
+
+int f0/0.60
+encapsulation dot1Q 60
+ip add 172.23.244.3 255.255.254.0
+
+int f0/0.70
+encapsulation dot1Q 70
+ip add 172.23.242.163 255.255.255.224
+
+int f0/0.100
+encapsulation dot1q 100 native
+ip add 172.23.242.195 255.255.255.192
+
+----------------------------------------
+
+Creacion del HSRP
+
+int f0/0.30
+standby version 2 
+standby 30 ip 172.23.248.1
+standby 30 preempt
+standby 30 priority 150
+
+int f0/0.40
+standby version 2 
+standby 40 ip 172.23.246.1
+standby 40 preempt
+standby 40 priority 150
+
+int f0/0.50
+standby version 2 
+standby 50 ip 172.23.243.1
+standby 50 preempt
+
+int f0/0.60
+standby version 2 
+standby 60 ip 172.23.244.1
+standby 60 preempt
+
+int f0/0.70
+standby version 2 
+standby 70 ip 172.23.242.161
+standby 70 preempt
+
+
+
+SW 2 capa 3 -> SW1
+ip default-gateway 172.23.242.161
+int vlan 70
+ip add 172.23.242.164 255.255.255.224
+
+SW 0 capa 3 -> SW2
+ip default-gateway 172.23.242.161
+int vlan 70
+ip add 172.23.242.165 255.255.255.224
+
+SW 1 capa 3 -> SW3
+ip default-gateway 172.23.242.161
+int vlan 70
+ip add 172.23.242.166 255.255.255.224
+
+SW 2 capa 2 -> S1
+ip default-gateway 172.23.242.161
+int vlan 70
+ip add 172.23.242.167 255.255.255.224
+
+SW 3 capa 2 -> S2
+ip default-gateway 172.23.242.161
+int vlan 70
+ip add 172.23.242.168 255.255.255.224
+
+SW 4 capa 2 -> S3
+ip default-gateway 172.23.242.161
+int vlan 70
+ip add 172.23.242.169 255.255.255.224
