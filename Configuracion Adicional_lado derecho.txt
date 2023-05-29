@@ -86,3 +86,55 @@ SW 4 capa 2 -> S3
 ip default-gateway 172.23.242.161
 int vlan 70
 ip add 172.23.242.169 255.255.255.224
+
+----------------------------------------
+
+CONFIGURACION ETHERCHANNEL
+
+int range f0/23-24
+switchport mode access
+switchport nonegotiate
+channel-group 1 mode auto
+
+int port-channel 1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan 30,40,50,60,70
+switchport trunk native vlan 100
+
+-----------------------------------------
+Configuracion finalizada para el DHCP
+
+IP HELPER (para los Routers)
+
+int f0/0.30
+ip helper-address 172.23.224.2
+
+int f0/0.40
+ip helper-address 172.23.224.2
+
+int f0/0.50
+ip helper-address 172.23.224.2
+
+int f0/0.60
+ip helper-address 172.23.224.2
+
+int f0/0.70
+ip helper-address 172.23.224.2
+
+--------------------------------
+Condiguracion de Servicios (pagina)
+
+logging on
+logging host 172.23.128.2
+logging userinfo 
+service timestamps log datetime msec
+ntp server 172.23.128.2
+ntp update-calendar 
+do write
+
+logging on
+logging host 172.23.128.2
+service timestamps log datetime msec
+ntp server 172.23.128.2
+do write
