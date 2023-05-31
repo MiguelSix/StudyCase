@@ -1,0 +1,39 @@
+int range f0/23-24
+switchport mode access
+switchport nonegotiate
+
+channel-group 1 mode auto
+
+
+int port-channel 1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan 30,40,50,60,70
+switchport trunk native vlan 100
+
+
+
+
+int range f0/14-15
+channel-protocol pagp
+channel-group 5 mode auto
+
+int port-channel 1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan 30,40,50,60,70
+switchport trunk native vlan 100
+
+int range f0/3-4
+
+ no switchport trunk encapsulation dot1q
+ no channel-protocol pagp
+ channel-group 0 mode desirable
+
+int range f0/23-24
+
+ no switchport trunk native vlan 100
+ no switchport trunk allowed vlan 30,40,50,60,70
+ no switchport trunk encapsulation dot1q
+ no switchport mode trunk
+

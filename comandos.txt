@@ -1,0 +1,96 @@
+int f0/0.30
+encapsulation dot1Q 30
+ip add 172.23.188.5 255.255.252.0
+int f0/0.40
+encapsulation dot1Q 40
+ip add 172.23.184.5 255.255.252.0
+int f0/0.50
+encapsulation dot1Q 50
+ip add 172.23.182.5 255.255.254.0
+int f0/0.60
+encapsulation dot1Q 60
+ip add 172.23.181.5 255.255.255.0
+int f0/0.70
+encapsulation dot1Q 70
+ip add 172.23.180.165 255.255.255.224
+int f0/0.100
+encapsulation dot1q 100 native
+ip add 172.23.180.197 255.255.255.192
+
+vlan 30
+name Sales
+vlan 40
+name Accounting
+vlan 50
+name HR
+vlan 60
+name Production
+vlan 70
+name Management
+vlan 100
+name Native
+int range F0/1-5
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk native vlan 100
+switchport trunk allowed vlan 30,40,50,60,70
+no shut
+
+int vlan 70
+ip add 172.23.180.166 255.255.255.224
+
+
+
+
+
+
+HSRP:
+
+int f1/0.30
+standby version 2 
+standby 30 ip 172.23.188.1
+standby 30 preempt
+
+int f1/0.40
+standby version 2 
+standby 40 ip 172.23.184.1
+standby 40 preempt
+
+int f1/0.50
+standby version 2 
+standby 50 ip 172.23.182.1
+standby 50 preempt
+standby 50 priority 150
+
+int f1/0.60
+standby version 2 
+standby 60 ip 172.23.181.1
+standby 60 preempt
+standby 60 priority 150
+
+int f1/0.70
+standby version 2 
+standby 70 ip 172.23.180.161
+standby 70 preempt
+standby 70 priority 150
+
+
+ip default-gateway 172.23.180.161
+
+
+DHCP:
+
+int f0/0.30
+ip helper-address 172.23.224.2
+
+int f0/0.40
+ip helper-address 172.23.224.2
+
+int f0/0.50
+ip helper-address 172.23.224.2
+
+int f0/0.60
+ip helper-address 172.23.224.2
+
+int f0/0.70
+ip helper-address 172.23.224.2
